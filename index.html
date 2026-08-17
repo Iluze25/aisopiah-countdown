@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menuju Hari Spesialmu 🎂💗</title>
+    <!-- Google Fonts: Quicksand & Fredoka -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Quicksand:wght@500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <!-- Partikel Bintang Latar Belakang -->
+    <div id="particle-container" aria-hidden="true"></div>
+
+    <!-- Awan Bawah dengan Line Art Detail & Multi-Layer -->
+    <div class="bottom-clouds-wrapper" aria-hidden="true">
+
+        <!-- Layer Awan 1: Belakang (Warm Peach-Pink dengan Line Art Lembut) -->
+        <svg class="cloud-svg cloud-svg-back" viewBox="0 0 1440 320" preserveAspectRatio="none">
+            <defs>
+                <linearGradient id="gradCloudBack" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff" />
+                    <stop offset="45%" stop-color="#ffdbe8" />
+                    <stop offset="100%" stop-color="#ffd5be" />
+                </linearGradient>
+            </defs>
+            <path class="cloud-body-back"
+                d="M0,320 L0,180 Q60,110 160,150 Q260,70 380,120 Q480,50 600,110 Q720,40 860,100 Q980,50 1100,120 Q1240,60 1360,130 Q1410,160 1440,180 L1440,320 Z"
+                fill="url(#gradCloudBack)" />
+            <!-- Line Art Kontur Awan Belakang -->
+            <path class="cloud-line"
+                d="M0,180 Q60,110 160,150 Q260,70 380,120 Q480,50 600,110 Q720,40 860,100 Q980,50 1100,120 Q1240,60 1360,130 Q1410,160 1440,180" />
+            <path class="cloud-inner-line"
+                d="M120,165 Q180,130 240,155 M540,135 Q600,95 660,125 M800,120 Q860,80 920,115 M1040,140 Q1100,100 1160,135" />
+        </svg>
+
+        <!-- Layer Awan 2: Tengah (Cotton Candy Pink dengan Guratan Puffy) -->
+        <svg class="cloud-svg cloud-svg-mid" viewBox="0 0 1440 280" preserveAspectRatio="none">
+            <defs>
+                <linearGradient id="gradCloudMid" x1="0%" y1="0%" x2="50%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff" />
+                    <stop offset="50%" stop-color="#ffe4ee" />
+                    <stop offset="100%" stop-color="#ffcfde" />
+                </linearGradient>
+            </defs>
+            <path class="cloud-body-mid"
+                d="M-40,280 L-40,140 Q70,60 190,110 Q310,30 450,90 Q580,20 720,80 Q850,20 990,80 Q1120,30 1260,100 Q1380,60 1480,140 L1480,280 Z"
+                fill="url(#gradCloudMid)" />
+            <!-- Line Art Kontur Awan Tengah -->
+            <path class="cloud-line"
+                d="M-40,140 Q70,60 190,110 Q310,30 450,90 Q580,20 720,80 Q850,20 990,80 Q1120,30 1260,100 Q1380,60 1480,140" />
+            <path class="cloud-inner-line"
+                d="M150,125 Q210,85 270,115 M400,105 Q460,65 520,95 M670,95 Q730,55 790,90 M930,95 Q990,55 1050,90 M1200,115 Q1260,80 1320,110" />
+        </svg>
+
+        <!-- Layer Awan 3: Depan Utama (Dominan Putih Cerah dengan Line Art Tajam & Detail) -->
+        <svg class="cloud-svg cloud-svg-front" viewBox="0 0 1440 240" preserveAspectRatio="none">
+            <defs>
+                <linearGradient id="gradCloudFront" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff" />
+                    <stop offset="60%" stop-color="#fff0f5" />
+                    <stop offset="100%" stop-color="#ffdce8" />
+                </linearGradient>
+            </defs>
+            <path class="cloud-body-front"
+                d="M0,240 L0,120 Q90,30 220,80 Q340,10 490,70 Q620,0 760,60 Q890,5 1030,65 Q1170,10 1300,75 Q1390,40 1440,100 L1440,240 Z"
+                fill="url(#gradCloudFront)" />
+            <!-- Line Art Kontur Utama & Guratan Kubah -->
+            <path class="cloud-line-front"
+                d="M0,120 Q90,30 220,80 Q340,10 490,70 Q620,0 760,60 Q890,5 1030,65 Q1170,10 1300,75 Q1390,40 1440,100" />
+            <!-- Detail Lekukan Dalam (Fluffy Cloud Swirls) -->
+            <path class="cloud-inner-line"
+                d="M80,105 Q140,55 200,95 M300,90 Q370,40 430,85 M460,85 Q520,40 580,75 M710,75 Q780,30 840,70 M870,75 Q940,30 1000,75 M1120,85 Q1190,35 1250,85" />
+            <path class="cloud-accent-swirl"
+                d="M180,110 Q200,100 220,115 M460,95 Q485,80 510,98 M730,90 Q755,75 780,92 M1000,95 Q1025,80 1050,98" />
+        </svg>
+
+    </div>
+
+    <!-- Canvas Balon Layar Penuh (Tepat 4 Balon) -->
+    <canvas id="balloon-canvas"></canvas>
+
+    <!-- Kartu Utama Website -->
+    <main class="main-card" id="main-card">
+        <!-- Hiasan Background Internal Kartu -->
+        <div class="card-ambient-bg" aria-hidden="true">
+            <div class="card-glow glow-1"></div>
+            <div class="card-glow glow-2"></div>
+            <div class="card-inner-clouds"></div>
+        </div>
+
+        <!-- Canvas Khusus Love di Sekitar Kotak (Ikut Terskrol) -->
+        <canvas id="heart-canvas"></canvas>
+
+        <!-- Tampilan Utama Countdown & Pesan -->
+        <div id="countdown-view">
+            <header class="header-area">
+                <div class="cake-badge"><img
+                        src="https://i.pinimg.com/1200x/ab/97/f2/ab97f22903a56788af9909ea6a3518da.jpg"
+                        style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 5px solid white; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15)"
+                        alt=""></div>
+                <h1 class="main-title">Menuju Hari Spesialmu <span class="heart-pulse">💗</span></h1>
+                <p class="subtitle">Sebentar lagi ada seseorang yang bertambah usia...</p>
+            </header>
+
+            <!-- 4 Kartu Countdown -->
+            <section class="countdown-grid" id="countdown-grid">
+                <!-- Hari (Peach) -->
+                <div class="timer-card card-days">
+                    <div class="card-glass"></div>
+                    <div class="card-inner">
+                        <span class="timer-number" id="days">00</span>
+                        <span class="timer-label">HARI</span>
+                    </div>
+                </div>
+
+                <!-- Jam (Baby Blue) -->
+                <div class="timer-card card-hours">
+                    <div class="card-glass"></div>
+                    <div class="card-inner">
+                        <span class="timer-number" id="hours">00</span>
+                        <span class="timer-label">JAM</span>
+                    </div>
+                </div>
+
+                <!-- Menit (Strawberry Pink) -->
+                <div class="timer-card card-minutes">
+                    <div class="card-glass"></div>
+                    <div class="card-inner">
+                        <span class="timer-number" id="minutes">00</span>
+                        <span class="timer-label">MENIT</span>
+                    </div>
+                </div>
+
+                <!-- Detik (Lavender) -->
+                <div class="timer-card card-seconds">
+                    <div class="card-glass"></div>
+                    <div class="card-inner">
+                        <span class="timer-number" id="seconds">00</span>
+                        <span class="timer-label">DETIK</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Kotak Ucapan & Pesan Hangat -->
+
+            <p class="sweet-quote">
+                Hari spesialmu sebentar lagi tiba! 🎀💗<br />
+                Siap-siap menerima banyak senyum, kebahagiaan, dan kejutan kecil yang manis! ✨🎁
+            </p>
+            <div class="signature">
+                <span>Love,</span>
+                <strong>Ai Sopiah</strong>
+            </div>
+
+        </div>
+
+        <!-- Tampilan Saat Waktu Habis -->
+        <div id="celebration-view" class="celebration-view hidden">
+            <div class="huge-emoji">🎂✨🥳</div>
+            <h1 class="celebration-title">HARI INI HARI SPESIALMU! 💖</h1>
+            <p class="celebration-message">
+                Selamat Ulang Tahun! Semoga harimu dipenuhi senyuman manis, kebahagiaan tiada tara, dan cinta yang
+                melimpah! 🎈🎁
+            </p>
+            <div class="signature">
+                <span>Love always,</span>
+                <strong>[Nama Kamu]</strong>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

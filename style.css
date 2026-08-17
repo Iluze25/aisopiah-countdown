@@ -1,0 +1,683 @@
+/* ==========================================================================
+   Variabel Warna & Tema Pastel
+   ========================================================================== */
+:root {
+  --bg-gradient: linear-gradient(155deg, #ffeef8 0%, #f6e8fd 42%, #fff0e8 100%);
+
+  /* Background Transparan Kaca untuk Main Card */
+  --card-bg-gradient: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 0.62) 0%,
+    rgba(255, 242, 248, 0.48) 20%,
+    rgba(248, 238, 255, 0.45) 50%
+  );
+  --card-border: rgba(255, 255, 255, 0.88);
+
+  /* Pendaran Cahaya Halus (Soft Multi-Layer Glow) */
+  --card-glow-shadow:
+    0 20px 48px rgba(223, 178, 208, 0.32), 0 0 35px rgba(255, 185, 220, 0.45),
+    0 0 70px rgba(255, 218, 235, 0.28),
+    inset 0 0 24px rgba(255, 255, 255, 0.75),
+    inset 0 2px 8px rgba(255, 255, 255, 0.95);
+
+  /* Kartu Countdown */
+  --day-card: linear-gradient(145deg, #ffd3b6, #ffb38a);
+  --day-shadow: 0 10px 22px rgba(255, 179, 138, 0.42);
+
+  --hour-card: linear-gradient(145deg, #cbebfd, #9cd5fa);
+  --hour-shadow: 0 10px 22px rgba(156, 213, 250, 0.42);
+
+  --min-card: linear-gradient(145deg, #ffc7d9, #ff99b9);
+  --min-shadow: 0 10px 22px rgba(255, 153, 185, 0.42);
+
+  --sec-card: linear-gradient(145deg, #dfd0ff, #bfa3fc);
+  --sec-shadow: 0 10px 22px rgba(191, 163, 252, 0.42);
+
+  --text-main: #684a61;
+  --text-sub: #8d6b82;
+
+  --font-title: "Fredoka", "Quicksand", sans-serif;
+  --font-body: "Quicksand", sans-serif;
+}
+
+/* ==========================================================================
+   Reset & Layout Dasar
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  position: relative;
+  color: var(--text-main);
+  padding: 2.5rem 1.2rem 5rem;
+}
+
+/* ==========================================================================
+   Awan Bawah dengan Line Art Detail & Animasi Mengambang
+   ========================================================================== */
+.bottom-clouds-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 38vh;
+  min-height: 240px;
+  max-height: 380px;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.cloud-svg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.cloud-line {
+  fill: none;
+  stroke: rgba(235, 145, 180, 0.55);
+  stroke-width: 2.2px;
+  stroke-linecap: round;
+}
+
+.cloud-line-front {
+  fill: none;
+  stroke: rgba(230, 130, 170, 0.65);
+  stroke-width: 2.6px;
+  stroke-linecap: round;
+}
+
+.cloud-inner-line {
+  fill: none;
+  stroke: rgba(240, 150, 185, 0.45);
+  stroke-width: 1.8px;
+  stroke-linecap: round;
+}
+
+.cloud-accent-swirl {
+  fill: none;
+  stroke: rgba(245, 160, 195, 0.4);
+  stroke-width: 1.5px;
+  stroke-linecap: round;
+}
+
+.cloud-svg-back {
+  opacity: 0.85;
+  filter: drop-shadow(0 -6px 16px rgba(255, 205, 225, 0.4));
+  animation: cloudDriftBack 14s infinite ease-in-out alternate;
+}
+
+.cloud-svg-mid {
+  opacity: 0.92;
+  filter: drop-shadow(0 -8px 20px rgba(255, 195, 215, 0.45));
+  animation: cloudDriftMid 11s infinite ease-in-out alternate-reverse;
+}
+
+.cloud-svg-front {
+  opacity: 0.98;
+  filter: drop-shadow(0 -10px 24px rgba(255, 185, 210, 0.5));
+  animation: cloudDriftFront 9s infinite ease-in-out alternate;
+}
+
+@keyframes cloudDriftBack {
+  0% {
+    transform: translate(0, 0) scaleY(1);
+  }
+  50% {
+    transform: translate(18px, -8px) scaleY(1.03);
+  }
+  100% {
+    transform: translate(-14px, 4px) scaleY(0.98);
+  }
+}
+
+@keyframes cloudDriftMid {
+  0% {
+    transform: translate(0, 0) scaleY(1);
+  }
+  50% {
+    transform: translate(-20px, -12px) scaleY(1.04);
+  }
+  100% {
+    transform: translate(12px, 6px) scaleY(0.97);
+  }
+}
+
+@keyframes cloudDriftFront {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(15px, -10px);
+  }
+  100% {
+    transform: translate(-10px, 5px);
+  }
+}
+
+/* Canvas Balon & Partikel */
+#balloon-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  pointer-events: none;
+}
+
+#particle-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   Main Window / Card Container (Transparan & Glowing)
+   ========================================================================== */
+.main-card {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 880px;
+  background: var(--card-bg-gradient);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 3.5px solid var(--card-border);
+  border-radius: 38px;
+  box-shadow: var(--card-glow-shadow);
+  padding: 2.8rem 2.4rem;
+  text-align: center;
+  overflow: hidden;
+  animation: cardAuraPulse 6s infinite ease-in-out alternate;
+}
+
+/* Efek Nafas / Pendaran Glow Halus pada Kartu */
+@keyframes cardAuraPulse {
+  0% {
+    box-shadow:
+      0 20px 48px rgba(223, 178, 208, 0.32),
+      0 0 30px rgba(255, 185, 220, 0.4),
+      0 0 60px rgba(255, 218, 235, 0.2),
+      inset 0 0 20px rgba(255, 255, 255, 0.7),
+      inset 0 2px 8px rgba(255, 255, 255, 0.95);
+  }
+  100% {
+    box-shadow:
+      0 24px 54px rgba(223, 178, 208, 0.38),
+      0 0 45px rgba(255, 185, 220, 0.55),
+      0 0 85px rgba(255, 218, 235, 0.35),
+      inset 0 0 26px rgba(255, 255, 255, 0.85),
+      inset 0 2px 10px rgba(255, 255, 255, 1);
+  }
+}
+
+/* Background & Pendaran Internal Kartu */
+.card-ambient-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.card-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(45px);
+  opacity: 0.45;
+}
+
+.glow-1 {
+  width: 260px;
+  height: 260px;
+  background: #ffd6e7;
+  top: -40px;
+  left: -40px;
+}
+
+.glow-2 {
+  width: 280px;
+  height: 280px;
+  background: #ffe3d1;
+  bottom: -50px;
+  right: -50px;
+}
+
+.card-inner-clouds {
+  position: absolute;
+  bottom: -30px;
+  left: -10%;
+  width: 120%;
+  height: 110px;
+  background: radial-gradient(
+    ellipse at 50% 100%,
+    rgba(255, 255, 255, 0.65) 0%,
+    rgba(255, 240, 248, 0) 70%
+  );
+  filter: blur(16px);
+}
+
+/* Canvas Love di Dalam Main Card */
+#heart-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 6;
+  border-radius: 38px;
+}
+
+/* ==========================================================================
+   Header: Badge, Judul, Subtitle
+   ========================================================================== */
+.header-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2.2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.cake-badge {
+  font-size: 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0 4px 14px rgba(255, 175, 204, 0.35);
+  margin-bottom: 0.8rem;
+  animation: gentleBounce 3s infinite ease-in-out;
+}
+
+.main-title {
+  font-family: var(--font-title);
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #754b6d;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.95);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  animation: floatingTitle 4s infinite ease-in-out;
+}
+
+.heart-pulse {
+  display: inline-block;
+  animation: heartBeat 1.8s infinite ease-in-out;
+}
+
+.subtitle {
+  font-size: 1.05rem;
+  color: var(--text-sub);
+  margin-top: 0.4rem;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Kartu Countdown
+   ========================================================================== */
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.4rem;
+  margin-bottom: 2.2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.timer-card {
+  border-radius: 28px;
+  padding: 1.6rem 0.8rem;
+  position: relative;
+  overflow: hidden;
+  border: 4px solid rgba(255, 255, 255, 0.9);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.card-glass {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  right: 12px;
+  height: 38%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0)
+  );
+  border-radius: 20px 20px 80px 80px;
+  pointer-events: none;
+}
+
+.card-days {
+  background: var(--day-card);
+  box-shadow: var(--day-shadow);
+}
+.card-hours {
+  background: var(--hour-card);
+  box-shadow: var(--hour-shadow);
+}
+.card-minutes {
+  background: var(--min-card);
+  box-shadow: var(--min-shadow);
+}
+.card-seconds {
+  background: var(--sec-card);
+  box-shadow: var(--sec-shadow);
+}
+
+.timer-card:hover {
+  transform: translateY(-6px) scale(1.02);
+}
+
+.card-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.timer-number {
+  font-family: var(--font-title);
+  font-size: 3.4rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  line-height: 1;
+  display: inline-block;
+  will-change: transform;
+}
+
+.timer-label {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: #ffffff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* ==========================================================================
+   Kotak Ucapan (Transparan Senada)
+   ========================================================================== */
+.message-box {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px dashed rgba(255, 175, 204, 0.7);
+  border-radius: 22px;
+  padding: 1.3rem 1.8rem;
+  max-width: 640px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.sweet-quote {
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.signature {
+  margin-top: 0.8rem;
+  font-size: 0.95rem;
+  color: #8c5b7b;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.signature strong {
+  font-family: var(--font-title);
+  font-size: 1.15rem;
+  color: #d14979;
+}
+
+/* ==========================================================================
+   Celebration View
+   ========================================================================== */
+.hidden {
+  display: none !important;
+}
+
+.celebration-view {
+  padding: 2rem 1rem;
+  position: relative;
+  z-index: 2;
+  animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.huge-emoji {
+  font-size: 4.2rem;
+  margin-bottom: 1rem;
+  animation: gentleBounce 2s infinite ease-in-out;
+}
+
+.celebration-title {
+  font-family: var(--font-title);
+  font-size: 2.6rem;
+  color: #d14979;
+  margin-bottom: 1rem;
+}
+
+.celebration-message {
+  font-size: 1.18rem;
+  line-height: 1.7;
+  max-width: 560px;
+  margin: 0 auto 1.5rem;
+  color: var(--text-main);
+}
+
+/* ==========================================================================
+   Animasi Keyframes
+   ========================================================================== */
+@keyframes floatingTitle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes gentleBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes heartBeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(1.25);
+  }
+  30% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.15);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.scale-pulse {
+  animation: scalePulseAnim 0.35s ease-out;
+}
+
+.strong-pulse {
+  animation: strongPulseAnim 0.45s ease-out;
+}
+
+@keyframes scalePulseAnim {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.14);
+    color: #fffdf0;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes strongPulseAnim {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.22);
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9));
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.twinkle-star {
+  position: absolute;
+  color: #ffdf79;
+  font-size: 1.1rem;
+  user-select: none;
+  pointer-events: none;
+  animation: twinkle 2s ease-in-out forwards;
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(90deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.3) rotate(180deg);
+  }
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 14px;
+  border-radius: 3px;
+  pointer-events: none;
+  animation: confettiFall linear forwards;
+}
+
+@keyframes confettiFall {
+  0% {
+    opacity: 1;
+    transform: translateY(-20px) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(105vh) rotate(720deg);
+  }
+}
+
+/* ==========================================================================
+   Responsif
+   ========================================================================== */
+@media (max-width: 768px) {
+  .main-card {
+    padding: 2rem 1.2rem;
+    border-radius: 28px;
+  }
+
+  .main-title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+  }
+
+  .countdown-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .timer-card {
+    padding: 1.2rem 0.5rem;
+    border-radius: 22px;
+  }
+
+  .timer-number {
+    font-size: 2.6rem;
+  }
+
+  .timer-label {
+    font-size: 0.85rem;
+  }
+
+  .bottom-clouds-wrapper {
+    height: 30vh;
+  }
+}
+
+@media (max-width: 420px) {
+  body {
+    padding: 1rem 0.6rem 4rem;
+  }
+
+  .main-title {
+    font-size: 1.6rem;
+  }
+
+  .timer-number {
+    font-size: 2.2rem;
+  }
+
+  .sweet-quote {
+    font-size: 0.92rem;
+  }
+}
