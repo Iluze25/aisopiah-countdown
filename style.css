@@ -323,11 +323,6 @@ body {
   animation: floatingTitle 4s infinite ease-in-out;
 }
 
-.heart-pulse {
-  display: inline-block;
-  animation: heartBeat 1.8s infinite ease-in-out;
-}
-
 .subtitle {
   font-size: 1.05rem;
   color: var(--text-sub);
