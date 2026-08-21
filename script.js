@@ -4,7 +4,7 @@
 const BIRTHDAY_CONFIG = {
   // Format: YYYY-MM-DDTHH:mm:ss
   targetDate: new Date("2026-08-23T21:15:00"),
-};
+}; 
 
 /* Elemen DOM */
 const daysEl = document.getElementById("days");
